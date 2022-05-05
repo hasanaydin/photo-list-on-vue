@@ -1,11 +1,10 @@
 <template>
   <Modal :modalClose="modalClose" :activeImage="activeImage" />
-  
-    <PhotoListItem
-      :imageListFiltered="imageListFiltered"
-      :modalOpen="modalOpen"
-    />
-  
+  <PhotoListItem
+    :imageListFiltered="imageListFiltered"
+    :modalOpen="modalOpen"
+  />
+
   <div class="footer">
     <PageLimit :setLimit="setLimit" />
     <PageNumber
@@ -31,6 +30,7 @@ import PageLimit from "./PageLimit.vue";
 import Modal from "./Modal.vue";
 import PhotoListItem from "./PhotoListItem.vue";
 export default {
+  name: "PhotoList",
   methods: {
     modalOpen(image) {
       this.activeImage = image;
@@ -39,7 +39,6 @@ export default {
       this.activeImage = [];
     },
     setLimit(event) {
-      
       this.pageLimit = event.target.value;
       this.imageListFiltered = this.imageList;
       this.activeAuthor = "all";
@@ -71,7 +70,7 @@ export default {
       );
     },
   },
-  name: "App",
+
   components: {
     PhotoListFilter,
     PageNumber,
@@ -95,13 +94,12 @@ export default {
       activeAuthor: "all",
     };
   },
+
   async mounted() {
     const { data } = await axios.get("https://picsum.photos/v2/list?limit=100");
     this.imageList = data;
     this.imageListFiltered = data;
-
-    this.authorList = Array.from(new Set(data.map((item) => item.author))); // burası array
-
+    this.authorList = Array.from(new Set(data.map((item) => item.author)));
     this.setPages(1);
   },
 };

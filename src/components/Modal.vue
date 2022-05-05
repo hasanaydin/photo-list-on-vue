@@ -25,7 +25,7 @@ export default {
   name: "PageLimit",
   props: {
     modalClose: Function,
-    activeImage:Object
+    activeImage: Object,
   },
 };
 </script>
