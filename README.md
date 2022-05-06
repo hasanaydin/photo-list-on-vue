@@ -1,5 +1,3 @@
-# video-sluts-test
-
 ## Project setup
 ```
 yarn install
